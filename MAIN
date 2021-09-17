@@ -7,7 +7,8 @@ import random
 import pandas as pd
 from datetime import datetime
 
-drive = webdriver.Chrome(executable_path=r'C:/Users/emman/Desktop/Uni/AED/Python/Intento nro 4000/chromedriver.exe')
+# Descargar Chromer Driver (Selenium)
+drive = webdriver.Chrome(executable_path=r'/DIRECTORIO DE/chromedriver.exe')
 
 
 def path():
