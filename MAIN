@@ -1,0 +1,91 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.keys import Keys
+import selenium.common.exceptions
+import time
+import random
+import pandas as pd
+from datetime import datetime
+
+drive = webdriver.Chrome(executable_path=r'C:/Users/emman/Desktop/Uni/AED/Python/Intento nro 4000/chromedriver.exe')
+
+
+def path():
+    global chrome
+    chrome = webdriver.Chrome()
+
+
+def url_name(url):
+    chrome.get(url)
+    time.sleep(5)
+
+
+def login(username, password):
+    iniciar = chrome.find_element_by_name("username")
+    iniciar.send_keys(username)
+
+    contra = chrome.find_element_by_name("password")
+    contra.send_keys(password)
+
+    # ESPECIE DE ENTER
+    contra.send_keys(Keys.RETURN)
+    time.sleep(5)
+
+    no_info = chrome.find_element_by_class_name("yWX7d")
+    no_info.click()
+    time.sleep(3)
+
+    no_act = chrome.find_element_by_class_name("HoLwm")
+    no_act.click()
+    time.sleep(3)
+
+
+def enviar_mensage(mensaje):
+    mensage = chrome.find_element_by_class_name("xLCgt")
+    mensage.click()
+    time.sleep(3)
+
+    mcaja = chrome.find_element_by_tag_name("textarea")
+    mcaja.send_keys(mensaje)
+    mcaja.send_keys(Keys.RETURN)
+
+  ARREGLAR
+# def chequeador_cumple():
+#     bday = pd.read_excel("listado.xlsx")
+#     bday["month"] = pd.DatetimeIndex(bday["Fechas"]).month
+#     bday["day"] = pd.DatetimeIndex(bday["Fechas"]).day
+#
+#     name = list(bday["Nombre"])
+#     mes_cumple = list(bday["month"])
+#     dia_cumple = list(bday["day"])
+#     instaname = list(bday["instaname"])
+#
+#     dictionary = {}
+#     for i in range(len(name)):
+#         dictionary[name[i]] = (mes_cumple[i], dia_cumple[i], instaname[i])
+#
+#     fecha = datetime.now().month, datetime.now().day
+#
+#     instanames = []
+#     for i in dictionary:
+#         if dictionary[i][0:2] == fecha:
+#             instanames.append(dictionary[i][-1])
+#     return instanames
+
+
+def principal():
+    path()
+    instanames = []  # LISTA DE USUARIOS
+    for i in range(len(instanames)):
+        url = "https://www.instagram.com"
+        url_name(url)
+        if i == 0:
+            login(usuario, contraseña)
+        url = f"https://www.instagram.com/{instanames[i]}/"
+        url_name(url)
+        enviar_mensage("Holaaa, estoy probando this en python :)")
+    chrome.close()
+
+
+if __name__ == '__main__':
+    principal()
